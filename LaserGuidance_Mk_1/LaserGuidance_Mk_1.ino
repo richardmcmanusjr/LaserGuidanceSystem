@@ -8,7 +8,7 @@ Date: April, 2023
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
-
+#include "opr5925.h"
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
 
@@ -21,11 +21,13 @@ Date: April, 2023
 #define OLED_RESET     -1 // Reset pin # (or -1 if sharing micro reset pin)
 #define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 #define PHOTO_1 A0 // First photodiode
-
+#define PHOTO_2 A1
+#define PHOTO_3 A2
+#define PHOTO_4 A3
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET); // Initialize Display
 
 void setup() {
-  pinMode(PHOTO_1, INPUT);
+  
   Serial.begin(9600);
 
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
@@ -36,14 +38,21 @@ void setup() {
 
   // Clear the buffer
   display.clearDisplay();
+  opr5925 quad_photo(PHOTO_1, PHOTO_2, PHOTO_3, PHOTO_4); 
+  quad_photo.tare(50);
 }
 
 int i = 0;
 int j = 22;
-int photo;
+int photo_1;
+int photo_2;
 void loop() {
-  photo = analogRead(PHOTO_1);
-  Serial.println(photo);
+  photo_1 = analogRead(PHOTO_1);
+  photo_2 = analogRead(PHOTO_2);
+  Serial.print(photo_1);
+  Serial.print(", ");
+  Serial.println(photo_2);
+  delay(50);
   display.clearDisplay();
   drawCrossHairs();
   drawHeader();
