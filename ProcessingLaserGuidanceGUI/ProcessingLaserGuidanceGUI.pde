@@ -22,7 +22,7 @@ void setup()
   noStroke();
   background(90,90,90);
 
-  port = new Serial(this, "/dev/cu.usbserial-110", 9600);  
+  port = new Serial(this, "/dev/cu.usbmodem101", 9600);  
  
   MP = loadImage("MP.png");
   MP.loadPixels();
@@ -37,17 +37,16 @@ void draw(){  //same as loop in arduino
    stringVal = port.readStringUntil('\n');
     if (stringVal != null) {
       strings = stringVal.split(",");
-      zForce[0] = parseFloat(strings[1]); // read it and store it in val
-      zForce[1] = parseFloat(strings[2]); // read it and store it in val
-      zForce[2] = parseFloat(strings[3]); // read it and store it in val
-      zForce[3] = parseFloat(strings[4]); // read it and store it in val
+      x = parseFloat(strings[0]); // read it and store it in val
+      y = parseFloat(strings[1]); // read it and store it in val
     }
   } 
-  println(zForce [0]);
-  totalForce = zForce[0] + zForce[1] + zForce[2] + zForce[3];
+  print(x);
+  print(", ");
+  println(y);
   if (totalForce > 10){
-    x = (((zForce[1]+zForce[2])/totalForce)*814) + XOFFSET;
-    y = (((zForce[0]+zForce[1])/totalForce)*627) + YOFFSET;
+    x = (x*814) + XOFFSET;
+    y = (y*627) + YOFFSET;
     fill(255,0,0);
     circle(x,y,20);
   }

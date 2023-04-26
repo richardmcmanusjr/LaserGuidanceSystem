@@ -43,6 +43,8 @@ void setup() {
 
 int i = 0;
 int j = 22;
+float x;
+float y;
 int photo_1;
 int photo_2;
 void loop() {
@@ -50,9 +52,14 @@ void loop() {
   display.clearDisplay();
   drawCrossHairs();
   drawHeader();
-  display.drawCircle(quad_photo.get_x() * (display.width() - 1), (quad_photo.get_y() * (47)) + 16, 6, SSD1306_WHITE);
-  display.fillCircle(quad_photo.get_x() * (display.width() - 1), (quad_photo.get_y() * (47)) + 16, 2, SSD1306_WHITE);
+  x = quad_photo.get_x();
+  y = quad_photo.get_y();
+  display.drawCircle(x * (display.width() - 1), (y * (47)) + 16, 6, SSD1306_WHITE);
+  display.fillCircle(x * (display.width() - 1), (y * (47)) + 16, 2, SSD1306_WHITE);
   display.display();      
+  Serial.print(x);
+  Serial.print(",");
+  Serial.println(y);
 }
 
 void drawCrossHairs() {
