@@ -49,10 +49,12 @@ void drawCrosshairs(){
   line(0, HEIGHT/2, WIDTH, HEIGHT/2);
   int i;
   for (i = 0; i < WIDTH; i += TICK_SPACING){
-    line(i, HEIGHT/2 + TICK_WIDTH, i, HEIGHT/2 - TICK_WIDTH);
+    if (i != 0)
+      line(i, HEIGHT/2 + TICK_WIDTH, i, HEIGHT/2 - TICK_WIDTH);
   }  
   for (i = 0; i < HEIGHT; i += TICK_SPACING){
-    line(WIDTH/2 + TICK_WIDTH, i, WIDTH/2 - TICK_WIDTH, i);
+    if (i != 0)
+      line(WIDTH/2 + TICK_WIDTH, i, WIDTH/2 - TICK_WIDTH, i);
   }  
   noFill();
   circle(WIDTH/2, HEIGHT/2, 2*WIDTH/3);
