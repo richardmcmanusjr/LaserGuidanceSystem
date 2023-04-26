@@ -10,8 +10,8 @@ public:
   void zero(int num_samples);
   void update();
   float getData(int i);
-  int read_x();
-  int read_y();
+  float get_x();
+  float get_y();
 private:
   long smoothedData(int i);            //returns the smoothed data value calculated from the dataset
   long dataSampleSet[4][DATA_SET];

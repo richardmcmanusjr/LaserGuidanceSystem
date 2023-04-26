@@ -58,6 +58,31 @@ float opr5925::getData(int i) // return fresh data from the moving average datas
     float x = data / calFactor;
     return x;
 }
+
+float opr5925::get_x()
+{
+  float quad_1 = getData(0);
+  float quad_2 = getData(1);
+  float quad_3 = getData(2);
+  float quad_4 = getData(3);
+  float right = quad_1 + quad_4;
+  float total = quad_1 + quad_2 + quad_3 + quad_4;
+  float x = right/total;
+  return x;
+}
+
+
+float opr5925::get_y()
+{
+  float quad_1 = getData(0);
+  float quad_2 = getData(1);
+  float quad_3 = getData(2);
+  float quad_4 = getData(3);
+  float down = quad_3 + quad_4;
+  float total = quad_1 + quad_2 + quad_3 + quad_4;
+  float y = down/total;
+  return y;
+}
   
 long opr5925::smoothedData(int i) 
 {
