@@ -25,6 +25,7 @@ Date: April, 2023
 #define PHOTO_3 A2
 #define PHOTO_4 A3
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET); // Initialize Display
+opr5925 quad_photo(PHOTO_1, PHOTO_2, PHOTO_3, PHOTO_4); 
 
 void setup() {
   
@@ -38,8 +39,7 @@ void setup() {
 
   // Clear the buffer
   display.clearDisplay();
-  opr5925 quad_photo(PHOTO_1, PHOTO_2, PHOTO_3, PHOTO_4); 
-  quad_photo.tare(50);
+  quad_photo.zero(250);
 }
 
 int i = 0;
@@ -47,17 +47,16 @@ int j = 22;
 int photo_1;
 int photo_2;
 void loop() {
-  photo_1 = analogRead(PHOTO_1);
-  photo_2 = analogRead(PHOTO_2);
+  quad_photo.update();
+  photo_1 = quad_photo.getData(0);
+  photo_2 = quad_photo.getData(1);
   Serial.print(photo_1);
   Serial.print(", ");
   Serial.println(photo_2);
-  delay(50);
   display.clearDisplay();
   drawCrossHairs();
   drawHeader();
   display.drawCircle(i, j, 6, SSD1306_WHITE);
-  delay(10);
   display.display();      
   if (i<164)
     i++;

@@ -11,19 +11,28 @@ opr5925::opr5925(int quad_1, int quad_2, int quad_3, int quad_4)
     pinMode(_quad_pins[i], INPUT);
   }
 }
-void opr5925::tare(int num_samples)
+void opr5925::zero(int num_samples)
 {
-  int i;
+  int i=0;
   int j;
-  int tare_value;
-  for(i=0; i<4; i++){
-    int sum = 0;
-    for(j = 0; j<num_samples; j++){
-      sum = analogRead(_quad_pins[i]);
-      delay(5);
+  int data;
+  int zero_value;
+  int sum[4] = {0,0,0,0};
+  while(i< 4*SAMPLES + IGN_HIGH_SAMPLE + IGN_LOW_SAMPLE){ 
+    update();
+    i++;
+    delay(20);
+  }
+  for(j = 0; j < num_samples; j++){
+    update();
+    delay(10);
+    for(i=0; i<4; i++){
+      int data = getData(i);
+      sum[i] += data;
     }
-    tare_value = sum / num_samples;
-    _tare_values[i] = tare_value;
+  }
+  for(i=0; i<4; i++){
+    _zero_values[i] = sum[i]/num_samples;
   }
 }
 void opr5925::update() 
@@ -40,13 +49,12 @@ void opr5925::update()
   {
     readIndex++;
   }
-  
 }
 
 float opr5925::getData(int i) // return fresh data from the moving average dataset
 {
     float lastSmoothedData = smoothedData(i);
-    float data = lastSmoothedData - _tare_values[i];
+    float data = lastSmoothedData - _zero_values[i];
     float x = data / calFactor;
     return x;
 }
