@@ -50,7 +50,6 @@ void loop() {
   display.clearDisplay();
   drawCrossHairs();
   drawHeader();
-  Serial.println(quad_photo.get_y());
   display.drawCircle(quad_photo.get_x() * (display.width() - 1), (quad_photo.get_y() * (47)) + 16, 6, SSD1306_WHITE);
   display.fillCircle(quad_photo.get_x() * (display.width() - 1), (quad_photo.get_y() * (47)) + 16, 2, SSD1306_WHITE);
   display.display();      
