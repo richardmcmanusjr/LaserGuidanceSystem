@@ -4,7 +4,7 @@ import processing.serial.*;
 Serial port;
 float val;
 String stringVal;
-PImage MP;
+PImage img;
 float[] zForce = new float[4];
 String[] strings = new String[8];
 float totalForce;
@@ -14,7 +14,7 @@ float XOFFSET = 43;
 float YOFFSET = 36;
 
 void settings(){
-  size(900,700);
+  size(814,806);
 }
 
 void setup() 
@@ -24,14 +24,14 @@ void setup()
 
   port = new Serial(this, "/dev/cu.usbmodem101", 9600);  
  
-  MP = loadImage("MP.png");
-  MP.loadPixels();
-  image(MP,XOFFSET,YOFFSET);
+  img = loadImage("CrossHair.jpg");
+  img.loadPixels();
+  image(img,0,0);
 }
 
 void draw(){  //same as loop in arduino
   background(90,90,90);
-  image(MP,XOFFSET,YOFFSET);
+  image(img,0,0);
   
   if ( port.available() > 0) {  // If data is available,
    stringVal = port.readStringUntil('\n');
@@ -41,14 +41,8 @@ void draw(){  //same as loop in arduino
       y = parseFloat(strings[1]); // read it and store it in val
     }
   } 
-  print(x);
-  print(", ");
-  println(y);
-  if (totalForce > 10){
-    x = (x*814) + XOFFSET;
-    y = (y*627) + YOFFSET;
-    fill(255,0,0);
-    circle(x,y,20);
-  }
-  
+  x = (x*814);
+  y = (y*806);
+  fill(255,0,0);
+  circle(x,y,20);
 }
