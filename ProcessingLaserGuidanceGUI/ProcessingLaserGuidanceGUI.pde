@@ -30,7 +30,6 @@ void setup()
 }
 
 void draw(){  //same as loop in arduino
-  background(90,90,90);
   image(img,0,0);
   
   if ( port.available() > 0) {  // If data is available,
