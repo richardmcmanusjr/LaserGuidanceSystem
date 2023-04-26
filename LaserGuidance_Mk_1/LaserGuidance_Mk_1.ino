@@ -19,8 +19,8 @@ Date: April, 2023
 // On an arduino LEONARDO:   2(SDA),  3(SCL), ...
 #define OLED_RESET     -1 // Reset pin # (or -1 if sharing micro reset pin)
 #define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
-#define PHOTO_1 A1 // First photodiode
-#define PHOTO_2 A3
+#define PHOTO_1 A3 // First photodiode
+#define PHOTO_2 A1
 #define PHOTO_3 A2
 #define PHOTO_4 A0
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET); // Initialize Display

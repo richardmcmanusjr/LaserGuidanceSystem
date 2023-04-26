@@ -1,5 +1,8 @@
 import controlP5.*; //import ControlP5 library
 import processing.serial.*;
+import java.util.*;
+
+
 
 Serial port;
 float val;
@@ -22,7 +25,16 @@ void setup()
 {  
   noStroke();
   background(90,90,90);
-  port = new Serial(this, "/dev/cu.usbmodem101", 9600);  
+  ArrayList<String> portNames = new ArrayList<String>(Arrays.asList(Serial.list()));
+  String portName = null;
+  if (portNames.contains("/dev/cu.usbmodem1101"))
+    portName = "/dev/cu.usbmodem1101";
+  else if (portNames.contains("/dev/cu.usbmodem101"))
+    portName = "/dev/cu.usbmodem101";
+  if (portName != null)
+    port = new Serial(this, portName, 9600);
+  else
+    for(;;);
 }
 
 void draw(){  //same as loop in arduino
