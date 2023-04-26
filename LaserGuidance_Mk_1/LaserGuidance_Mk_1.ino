@@ -11,9 +11,6 @@ Date: April, 2023
 #include "opr5925.h"
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
-
-#define PLOT_TOP 63
-
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
 // The pins for I2C are defined by the Wire-library.
 // On our Seeeduino SAMD21: A4(SDA), A5(SCL)
@@ -23,9 +20,9 @@ Date: April, 2023
 #define OLED_RESET     -1 // Reset pin # (or -1 if sharing micro reset pin)
 #define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 #define PHOTO_1 A1 // First photodiode
-#define PHOTO_2 A0
+#define PHOTO_2 A3
 #define PHOTO_3 A2
-#define PHOTO_4 A3
+#define PHOTO_4 A0
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET); // Initialize Display
 opr5925 quad_photo(PHOTO_1, PHOTO_2, PHOTO_3, PHOTO_4); 
 
@@ -50,16 +47,12 @@ int photo_1;
 int photo_2;
 void loop() {
   quad_photo.update();
-  photo_1 = quad_photo.getData(0);
-  photo_2 = quad_photo.getData(1);
-  Serial.print(photo_1);
-  Serial.print(", ");
-  Serial.println(photo_2);
   display.clearDisplay();
   drawCrossHairs();
   drawHeader();
-  display.drawCircle(quad_photo.get_x() * (display.width() - 1), (quad_photo.get_y() * (display.height()-1 - PLOT_TOP)) + 16, 6, SSD1306_WHITE);
-  display.fillCircle(quad_photo.get_x() * (display.width() - 1), (quad_photo.get_y() * (display.height()-1 - PLOT_TOP)) + 16, 2, SSD1306_WHITE);
+  Serial.println(quad_photo.get_y());
+  display.drawCircle(quad_photo.get_x() * (display.width() - 1), (quad_photo.get_y() * (47)) + 16, 6, SSD1306_WHITE);
+  display.fillCircle(quad_photo.get_x() * (display.width() - 1), (quad_photo.get_y() * (47)) + 16, 2, SSD1306_WHITE);
   display.display();      
 }
 
