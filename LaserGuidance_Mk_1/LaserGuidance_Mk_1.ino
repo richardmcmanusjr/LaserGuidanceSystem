@@ -20,9 +20,9 @@ Date: April, 2023
 #define OLED_RESET     -1 // Reset pin # (or -1 if sharing micro reset pin)
 #define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 #define PHOTO_1 A3 // First photodiode
-#define PHOTO_2 A1
-#define PHOTO_3 A2
-#define PHOTO_4 A0
+#define PHOTO_2 A2
+#define PHOTO_3 A0
+#define PHOTO_4 A1
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET); // Initialize Display
 opr5925 quad_photo(PHOTO_1, PHOTO_2, PHOTO_3, PHOTO_4); 
 
