@@ -13,8 +13,8 @@ public:
   float get_x();
   float get_y();
 private:
-  long smoothedData(int i);            //returns the smoothed data value calculated from the dataset
-  long dataSampleSet[4][DATA_SET];
+  float smoothedData(int i);            //returns the smoothed data value calculated from the dataset
+  float dataSampleSet[4][DATA_SET];
   int _quad_pins[4];
   int _zero_values[4] = {0,0,0,0};
   int current_data[4];

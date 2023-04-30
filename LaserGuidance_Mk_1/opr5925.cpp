@@ -38,9 +38,15 @@ void opr5925::zero(int num_samples)
 void opr5925::update() 
 {
   int i;
+  int j;
   for(i=0; i<4; i++){
-    dataSampleSet[i][readIndex] = analogRead(_quad_pins[i]);
-  }
+    int sum = 0;
+    for(j=0; j<AVERAGE_SAMPLES; j++){
+      sum += analogRead(_quad_pins[i]);
+    }
+    float data = sum/AVERAGE_SAMPLES;
+    dataSampleSet[i][readIndex] = data; 
+  } 
   if (readIndex == SAMPLES + IGN_HIGH_SAMPLE + IGN_LOW_SAMPLE - 1) 
   {
     readIndex = 0;
@@ -96,7 +102,7 @@ float opr5925::get_y()
   return y;
 }
   
-long opr5925::smoothedData(int i) 
+float opr5925::smoothedData(int i) 
 {
   long data = 0;
   uint8_t L = 1023; //Set initial low to high

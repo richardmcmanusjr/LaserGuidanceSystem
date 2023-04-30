@@ -28,7 +28,7 @@ opr5925 quad_photo(PHOTO_1, PHOTO_2, PHOTO_3, PHOTO_4);
 
 void setup() {
   
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
   if(!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
