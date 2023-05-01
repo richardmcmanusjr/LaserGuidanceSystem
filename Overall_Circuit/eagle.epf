@@ -294,6 +294,10 @@ UsedLibrary="/Users/richardmcmanjus/Documents/EAGLE/libraries/SMDResistor.lbr"
 UsedLibrary="/Users/richardmcmanjus/Documents/EAGLE/libraries/TLV3501.lbr"
 UsedLibrary="/Users/richardmcmanjus/Documents/EAGLE/libraries/YC164-FR-0760R4L.lbr"
 UsedLibrary="/Users/richardmcmanjus/Documents/EAGLE/libraries/hx711.lbr"
+UsedLibraryUrn="urn:adsk.eagle:library:37873560"
+UsedLibraryUrn="urn:adsk.eagle:library:516"
+UsedLibraryUrn="urn:adsk.eagle:library:515"
+UsedLibrary="/Users/richardmcmanjus/Documents/EAGLE/libraries/13oled.lbr"
 
 [Win_1]
 Type="Control Panel"

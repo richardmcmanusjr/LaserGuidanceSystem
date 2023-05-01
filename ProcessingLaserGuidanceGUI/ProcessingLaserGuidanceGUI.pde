@@ -32,7 +32,7 @@ void setup()
   else if (portNames.contains("/dev/cu.usbmodem101"))
     portName = "/dev/cu.usbmodem101";
   if (portName != null)
-    port = new Serial(this, portName, 9600);
+    port = new Serial(this, portName, 115200);
   else
     for(;;);
 }
