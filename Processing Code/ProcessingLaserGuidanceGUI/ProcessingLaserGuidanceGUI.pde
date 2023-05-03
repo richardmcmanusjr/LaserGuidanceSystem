@@ -16,6 +16,7 @@ int WIDTH = 800;
 int HEIGHT = 800;
 int TICK_WIDTH = 10;
 int TICK_SPACING = 50;
+int numPoints = 0;
 
 void settings(){
   size(WIDTH,HEIGHT);
@@ -38,15 +39,16 @@ void setup()
 }
 
 void draw(){  //same as loop in arduino
-  background(90,90,90);
+  //background(90,90,90);
   drawCrosshairs();
-  circle(WIDTH/2, HEIGHT/2, 2*WIDTH/3);
   if ( port.available() > 0) {  // If data is available,
    stringVal = port.readStringUntil('\n');
     if (stringVal != null) {
       strings = stringVal.split(",");
       x = parseFloat(strings[0]); // read it and store it in val
       y = parseFloat(strings[1]); // read it and store it in val
+      numPoints++;
+      println(numPoints);
     }
   } 
   x = (x*WIDTH);
@@ -69,5 +71,7 @@ void drawCrosshairs(){
       line(WIDTH/2 + TICK_WIDTH, i, WIDTH/2 - TICK_WIDTH, i);
   }  
   noFill();
-  circle(WIDTH/2, HEIGHT/2, 2*WIDTH/3);
+  stroke(124,252,0);
+  circle(WIDTH/2, HEIGHT/2, 0.3*WIDTH);
+  stroke(0);
 }
